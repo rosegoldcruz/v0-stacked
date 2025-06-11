@@ -1,451 +1,492 @@
 // @ts-nocheck
 'use client'
 
-import React, { useState, useRef } from 'react';
+import { useState } from 'react'
 import { 
   Play, 
-  Video,
-  Image,
-  Users,
-  Music,
-  Target,
-  Sparkles,
-  Brain,
-  Layers,
-  Film,
-  Grid3x3,
-  Save,
-  Download,
-  Share2,
-  Settings,
-  Zap,
-  Upload,
-  Edit3,
-  Camera,
-  Mic,
-  Palette,
-  Square,
-  Star,
-  Monitor,
-  Triangle,
-  ShoppingBag,
-  Wand2,
-  FileText,
+  Pause, 
+  Settings, 
+  Download, 
+  Upload, 
+  Wand2, 
+  Video, 
+  Music, 
+  Image, 
+  Type, 
+  Users, 
   TrendingUp,
-  BarChart3,
-  Megaphone,
-  Volume2,
-  Scissors,
+  Sparkles,
+  Eye,
   Clock,
-  Check
-} from 'lucide-react';
+  BarChart3,
+  Zap
+} from 'lucide-react'
 
-const AeonStudio = () => {
-  const [activeSection, setActiveSection] = useState('dashboard');
-  const [isGenerating, setIsGenerating] = useState(false);
+export default function StudioPage() {
+  const [activeTab, setActiveTab] = useState('forge')
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [generationProgress, setGenerationProgress] = useState(0)
+  const [formData, setFormData] = useState({
+    topic: '',
+    script: '',
+    duration: '30' as '15' | '30' | '60',
+    style: 'trendy' as 'trendy' | 'professional' | 'casual'
+  })
+  const [generatedVideo, setGeneratedVideo] = useState<any>(null)
+  const [error, setError] = useState('')
 
-  const mainSections = [
-    { 
-      id: 'dashboard', 
-      name: 'Dashboard', 
-      icon: <Grid3x3 className="w-5 h-5" />, 
-      color: 'from-blue-500 to-cyan-500' 
+  const tools = [
+    {
+      id: 'forge',
+      name: 'Video Forge',
+      icon: <Video className="w-5 h-5" />,
+      description: 'Transform scripts into viral videos',
+      status: 'ready'
     },
-    { 
-      id: 'video-studio', 
-      name: 'Video Forge', 
-      icon: <Video className="w-5 h-5" />, 
-      color: 'from-purple-500 to-pink-500' 
+    {
+      id: 'visual',
+      name: 'Visual Creator',
+      icon: <Image className="w-5 h-5" />,
+      description: 'Generate stunning visuals and animations',
+      status: 'ready'
     },
-    { 
-      id: 'storyboard', 
-      name: 'Vision Builder', 
-      icon: <Film className="w-5 h-5" />, 
-      color: 'from-pink-500 to-rose-500' 
+    {
+      id: 'human',
+      name: 'Human Studio',
+      icon: <Users className="w-5 h-5" />,
+      description: 'Create realistic human avatars',
+      status: 'ready'
     },
-    { 
-      id: 'image-gen', 
-      name: 'Visual Creator', 
-      icon: <Image className="w-5 h-5" />, 
-      color: 'from-green-500 to-emerald-500' 
+    {
+      id: 'sound',
+      name: 'Sound Lab',
+      icon: <Music className="w-5 h-5" />,
+      description: 'AI-powered music and effects',
+      status: 'ready'
     },
-    { 
-      id: 'avatars', 
-      name: 'Human Studio', 
-      icon: <Users className="w-5 h-5" />, 
-      color: 'from-orange-500 to-red-500' 
+    {
+      id: 'mass',
+      name: 'Mass Creator',
+      icon: <TrendingUp className="w-5 h-5" />,
+      description: 'Batch create hundreds of videos',
+      status: 'premium'
     },
-    { 
-      id: 'audio-studio', 
-      name: 'Sound Lab', 
-      icon: <Music className="w-5 h-5" />, 
-      color: 'from-teal-500 to-cyan-500' 
-    },
-    { 
-      id: 'batch-mode', 
-      name: 'Mass Creator', 
-      icon: <Layers className="w-5 h-5" />, 
-      color: 'from-violet-500 to-purple-500' 
-    },
-    { 
-      id: 'marketing', 
-      name: 'Campaign Hub', 
-      icon: <Target className="w-5 h-5" />, 
-      color: 'from-indigo-500 to-purple-500' 
-    },
-    { 
-      id: 'elements', 
-      name: 'Asset Vault', 
-      icon: <Sparkles className="w-5 h-5" />, 
-      color: 'from-yellow-500 to-orange-500' 
-    },
-    { 
-      id: 'custom-models', 
-      name: 'Personal AI', 
-      icon: <Brain className="w-5 h-5" />, 
-      color: 'from-red-500 to-pink-500' 
+    {
+      id: 'campaign',
+      name: 'Campaign Hub',
+      icon: <BarChart3 className="w-5 h-5" />,
+      description: 'Manage multi-platform campaigns',
+      status: 'premium'
     }
-  ];
+  ]
 
-  const featuredTools = [
+  const recentProjects = [
     {
-      title: 'AI-Powered Video Creation',
-      description: 'Create 1-minute videos with intelligent stitching',
-      icon: <Video className="w-8 h-8" />,
-      gradient: 'from-purple-500 to-pink-500',
-      action: 'Create Video'
+      id: 1,
+      title: 'Summer Fashion Trends',
+      thumbnail: '/api/placeholder/160/90',
+      duration: '0:58',
+      views: '12.3K',
+      status: 'published'
     },
     {
-      title: 'Avatar Video Generator',
-      description: 'Turn scripts into talking avatar videos',
-      icon: <Users className="w-8 h-8" />,
-      gradient: 'from-blue-500 to-cyan-500',
-      action: 'Create Avatar'
+      id: 2,
+      title: 'Quick Recipe Tutorial',
+      thumbnail: '/api/placeholder/160/90',
+      duration: '1:12',
+      views: '8.7K',
+      status: 'published'
     },
     {
-      title: 'Instant AI Video',
-      description: 'Generate videos from text with stunning visuals',
-      icon: <Zap className="w-8 h-8" />,
-      gradient: 'from-green-500 to-emerald-500',
-      action: 'Generate Now'
-    },
-    {
-      title: 'Brainstorm with AI',
-      description: 'Let AI help you create compelling scripts',
-      icon: <Brain className="w-8 h-8" />,
-      gradient: 'from-orange-500 to-red-500',
-      action: 'Start Brainstorm'
+      id: 3,
+      title: 'Tech Review Snippet',
+      thumbnail: '/api/placeholder/160/90',
+      duration: '0:45',
+      views: '5.2K',
+      status: 'draft'
     }
-  ];
+  ]
 
-  const renderDashboard = () => (
-    <div className="space-y-8">
-      {/* Welcome Header */}
-      <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl p-8 border border-purple-500/20">
-        <h2 className="text-3xl font-bold mb-4">Welcome to AEON Studio</h2>
-        <p className="text-gray-400 text-lg mb-6">
-          The ultimate AI creative workspace. Create 1-minute videos, generate stunning visuals, and build complete marketing campaigns.
-        </p>
-        <div className="flex space-x-4">
-          <button className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-colors">
-            Start New Project
-          </button>
-          <button className="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold transition-colors">
-            View Tutorials
-          </button>
-        </div>
-      </div>
-
-      {/* Featured Tools Grid */}
-      <div>
-        <h3 className="text-2xl font-bold mb-6">Featured Tools</h3>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featuredTools.map((tool, index) => (
-            <div key={index} className="bg-gray-800 rounded-xl p-6 hover:bg-gray-750 transition-colors cursor-pointer group">
-              <div className={`w-16 h-16 rounded-lg bg-gradient-to-r ${tool.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                {tool.icon}
-              </div>
-              <h4 className="text-xl font-semibold mb-2">{tool.title}</h4>
-              <p className="text-gray-400 mb-4">{tool.description}</p>
-              <button className="w-full py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors font-medium">
-                {tool.action}
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Recent Projects */}
-      <div>
-        <h3 className="text-2xl font-bold mb-6">Recent Projects</h3>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {['Product Launch Video', 'Brand Avatar Campaign', 'Social Media Series', 'Marketing Assets'].map((project, index) => (
-            <div key={index} className="bg-gray-800 rounded-xl p-4 hover:bg-gray-750 transition-colors cursor-pointer">
-              <div className="w-full h-32 bg-gradient-to-br from-gray-700 to-gray-600 rounded-lg mb-3 flex items-center justify-center">
-                <Video className="w-8 h-8 text-gray-400" />
-              </div>
-              <h4 className="font-semibold">{project}</h4>
-              <p className="text-sm text-gray-400">2 days ago</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderVideoStudio = () => (
-    <div className="space-y-6">
-      <div className="bg-gray-800 rounded-xl p-6">
-        <h3 className="text-2xl font-bold mb-4 flex items-center">
-          <Video className="w-6 h-6 mr-3 text-purple-400" />
-          Video Forge - Advanced Creation Studio
-        </h3>
-        <p className="text-gray-400 mb-6">Create professional 1-minute videos with AI-powered stitching and editing</p>
-        
-        <div className="grid lg:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-medium mb-2">Project Type</label>
-            <select className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3">
-              <option>Social Media Video</option>
-              <option>Product Demo</option>
-              <option>Brand Story</option>
-              <option>Educational Content</option>
-              <option>Marketing Campaign</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-2">Target Duration</label>
-            <select className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3">
-              <option>15 seconds</option>
-              <option>30 seconds</option>
-              <option>45 seconds</option>
-              <option>60 seconds (Recommended)</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="mt-6">
-          <h4 className="text-xl font-semibold mb-4 flex items-center">
-            <Brain className="w-5 h-5 mr-2 text-cyan-400" />
-            Smart Assembly Engine (AEON Secret Sauce)
-          </h4>
-          <p className="text-gray-400 mb-4">
-            Upload multiple clips or generate scenes, and AEON's AI will intelligently stitch them into a cohesive 1-minute video with professional transitions.
-          </p>
-          <div className="grid lg:grid-cols-2 gap-6">
-            <div>
-              <div className="space-y-3">
-                <div className="flex items-center">
-                  <Zap className="w-4 h-4 text-yellow-400 mr-2" />
-                  <span className="text-sm">Automatic scene analysis and ordering</span>
-                </div>
-                <div className="flex items-center">
-                  <Scissors className="w-4 h-4 text-blue-400 mr-2" />
-                  <span className="text-sm">Intelligent transition selection</span>
-                </div>
-                <div className="flex items-center">
-                  <Music className="w-4 h-4 text-green-400 mr-2" />
-                  <span className="text-sm">Auto music sync and timing</span>
-                </div>
-              </div>
-            </div>
-            <div className="bg-gray-700 rounded-lg p-4">
-              <h5 className="font-semibold mb-3">Assembly Settings</h5>
-              <div className="space-y-3">
-                <div>
-                  <label className="block text-sm text-gray-400 mb-1">Video Style</label>
-                  <select className="w-full bg-gray-600 border border-gray-500 rounded p-2 text-sm">
-                    <option>Dynamic (Fast cuts)</option>
-                    <option>Cinematic (Smooth flow)</option>
-                    <option>Documentary (Narrative)</option>
-                    <option>Social Media (Engaging)</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm text-gray-400 mb-1">Music Genre</label>
-                  <select className="w-full bg-gray-600 border border-gray-500 rounded p-2 text-sm">
-                    <option>Upbeat Electronic</option>
-                    <option>Corporate Inspiring</option>
-                    <option>Chill Ambient</option>
-                    <option>No Music</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 flex justify-end">
-          <button className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-lg font-semibold transition-colors flex items-center">
-            <Play className="w-5 h-5 mr-2" />
-            Generate Video
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderImageGeneration = () => (
-    <div className="space-y-6">
-      <div className="bg-gray-800 rounded-xl p-6">
-        <h3 className="text-2xl font-bold mb-4 flex items-center">
-          <Image className="w-6 h-6 mr-3 text-green-400" />
-          Visual Creator - AI Image Generation
-        </h3>
-        <p className="text-gray-400 mb-6">Generate stunning visuals with advanced AI-powered tools</p>
-        
-        <div className="grid lg:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-medium mb-2">Prompt</label>
-            <textarea
-              placeholder="A futuristic cityscape at sunset with neon lights and flying cars..."
-              className="w-full h-32 bg-gray-700 border border-gray-600 rounded-lg p-4 resize-none focus:ring-2 focus:ring-green-500"
-            />
-          </div>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Style Preset</label>
-              <select className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3">
-                <option>Photorealistic</option>
-                <option>Digital Art</option>
-                <option>Oil Painting</option>
-                <option>Anime</option>
-                <option>Sketch</option>
-                <option>Cinematic</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Aspect Ratio</label>
-              <div className="grid grid-cols-3 gap-2">
-                <button className="p-2 bg-gray-700 hover:bg-gray-600 rounded text-sm">1:1</button>
-                <button className="p-2 bg-gray-700 hover:bg-gray-600 rounded text-sm">16:9</button>
-                <button className="p-2 bg-gray-700 hover:bg-gray-600 rounded text-sm">9:16</button>
-              </div>
-            </div>
-            <button className="w-full py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-lg font-semibold transition-colors">
-              Generate Images
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderActiveSection = () => {
-    switch (activeSection) {
-      case 'dashboard': 
-        return renderDashboard();
-      case 'video-studio': 
-        return renderVideoStudio();
-      case 'image-gen': 
-        return renderImageGeneration();
-      default: 
-        return renderDashboard();
+  const handleGenerate = async () => {
+    if (!formData.topic.trim()) {
+      setError('Please enter a video topic')
+      return
     }
-  };
+
+    setIsGenerating(true)
+    setGenerationProgress(0)
+    setError('')
+    setGeneratedVideo(null)
+
+    try {
+      // Simulate progress updates
+      const progressInterval = setInterval(() => {
+        setGenerationProgress(prev => {
+          if (prev >= 90) {
+            clearInterval(progressInterval)
+            return 90
+          }
+          return prev + Math.random() * 15
+        })
+      }, 500)
+
+      const response = await fetch('/api/generate/video', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+
+      clearInterval(progressInterval)
+      setGenerationProgress(100)
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to generate video')
+      }
+
+      setGeneratedVideo(result.video)
+    } catch (error) {
+      console.error('Generation error:', error)
+      setError(error instanceof Error ? error.message : 'Failed to generate video')
+    } finally {
+      setIsGenerating(false)
+    }
+  }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-aeon-dark to-aeon-gray">
       {/* Header */}
-      <header className="bg-gray-800 border-b border-gray-700 px-6 py-4">
-        <div className="flex items-center justify-between">
+      <header className="border-b border-white/10 bg-black/20">
+        <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center space-x-4">
-            <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-              <Zap className="w-6 h-6 text-white" />
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-r from-aeon-purple to-aeon-blue rounded-lg flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold gradient-text">AEON Studio</span>
             </div>
-            <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                AEON Studio
-              </h1>
-              <p className="text-gray-400 text-sm">Premium AI Creative Workspace</p>
+            <div className="hidden md:flex items-center space-x-1 bg-white/5 rounded-lg p-1">
+              <span className="px-3 py-1 bg-aeon-purple rounded-md text-sm font-medium">Pro</span>
+              <span className="px-3 py-1 text-sm text-gray-300">25 videos remaining</span>
             </div>
           </div>
           
           <div className="flex items-center space-x-4">
-            <span className="px-3 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full text-xs font-bold text-black">
-              PRO
-            </span>
-            <button className="p-2 text-gray-400 hover:text-white transition-colors">
-              <Save className="w-5 h-5" />
-            </button>
-            <button className="p-2 text-gray-400 hover:text-white transition-colors">
-              <Download className="w-5 h-5" />
-            </button>
-            <button className="p-2 text-gray-400 hover:text-white transition-colors">
-              <Share2 className="w-5 h-5" />
-            </button>
-            <button className="p-2 text-gray-400 hover:text-white transition-colors">
+            <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
               <Settings className="w-5 h-5" />
             </button>
+            <div className="w-8 h-8 bg-aeon-purple rounded-full flex items-center justify-center">
+              <span className="text-sm font-semibold">U</span>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="flex">
+      <div className="flex h-[calc(100vh-73px)]">
         {/* Sidebar */}
-        <div className="w-72 bg-gray-800 border-r border-gray-700 h-[calc(100vh-80px)] overflow-y-auto">
-          <div className="p-4">
-            <nav className="space-y-2">
-              {mainSections.map((section) => (
-                <button
-                  key={section.id}
-                  onClick={() => setActiveSection(section.id)}
-                  className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-all ${
-                    activeSection === section.id
-                      ? 'bg-gradient-to-r from-gray-700 to-gray-600 border-l-4 border-purple-500'
-                      : 'hover:bg-gray-700'
-                  }`}
-                >
-                  <div className={`p-2 rounded-lg bg-gradient-to-r ${section.color}`}>
-                    {section.icon}
-                  </div>
-                  <span className="font-medium">{section.name}</span>
-                </button>
-              ))}
-            </nav>
-
-            {/* Usage Stats */}
-            <div className="mt-8 p-4 bg-gray-700 rounded-lg">
-              <h3 className="font-semibold mb-3">Monthly Usage</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Videos</span>
-                  <span>23/50</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Images</span>
-                  <span>156/∞</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Audio</span>
-                  <span>8/∞</span>
-                </div>
-              </div>
+        <aside className="w-64 border-r border-white/10 bg-black/20 p-6">
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
+                AI Tools
+              </h3>
+              <nav className="space-y-2">
+                {tools.map((tool) => (
+                  <button
+                    key={tool.id}
+                    onClick={() => setActiveTab(tool.id)}
+                    className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                      activeTab === tool.id 
+                        ? 'bg-aeon-purple text-white' 
+                        : 'text-gray-300 hover:bg-white/10'
+                    }`}
+                  >
+                    {tool.icon}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium truncate">{tool.name}</span>
+                        {tool.status === 'premium' && (
+                          <Zap className="w-3 h-3 text-yellow-400 flex-shrink-0" />
+                        )}
+                      </div>
+                      <p className="text-xs text-gray-400 truncate">{tool.description}</p>
+                    </div>
+                  </button>
+                ))}
+              </nav>
             </div>
 
-            {/* Recent Projects */}
-            <div className="mt-6">
-              <h3 className="text-sm font-semibold text-gray-400 mb-3">Recent Projects</h3>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
+                Recent Projects
+              </h3>
               <div className="space-y-2">
-                {['Brand Video Campaign', 'Product Demo Series', 'Avatar Presentation', 'Social Media Kit'].map((project, index) => (
-                  <div key={index} className="p-2 text-sm text-gray-300 hover:bg-gray-700 rounded cursor-pointer">
-                    {project}
+                {recentProjects.map((project) => (
+                  <div key={project.id} className="p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-6 bg-gray-700 rounded flex items-center justify-center">
+                        <Play className="w-3 h-3" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">{project.title}</p>
+                        <div className="flex items-center space-x-2 text-xs text-gray-400">
+                          <Clock className="w-3 h-3" />
+                          <span>{project.duration}</span>
+                          <Eye className="w-3 h-3" />
+                          <span>{project.views}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-        </div>
+        </aside>
 
         {/* Main Content */}
-        <div className="flex-1 overflow-y-auto p-6">
-          <div className="max-w-6xl mx-auto">
-            {renderActiveSection()}
+        <main className="flex-1 flex flex-col">
+          {/* Tool Content */}
+          <div className="flex-1 p-6">
+            {activeTab === 'forge' && (
+              <div className="h-full">
+                <div className="mb-6">
+                  <h1 className="text-3xl font-bold mb-2">Video Forge</h1>
+                  <p className="text-gray-300">Transform your scripts into viral TikTok videos with AI-powered editing</p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100%-100px)]">
+                  {/* Input Panel */}
+                  <div className="glass-effect rounded-xl p-6">
+                    <h3 className="text-xl font-semibold mb-4">Script Input</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Video Topic</label>
+                        <input
+                          type="text"
+                          placeholder="e.g., '5 Morning Habits That Changed My Life'"
+                          value={formData.topic}
+                          onChange={(e) => setFormData({...formData, topic: e.target.value})}
+                          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-aeon-purple focus:border-transparent"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Script Content</label>
+                        <textarea
+                          rows={8}
+                          placeholder="Enter your script or let AI generate one..."
+                          value={formData.script}
+                          onChange={(e) => setFormData({...formData, script: e.target.value})}
+                          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-aeon-purple focus:border-transparent resize-none"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Duration</label>
+                          <select 
+                            value={formData.duration}
+                            onChange={(e) => setFormData({...formData, duration: e.target.value as '15' | '30' | '60'})}
+                            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-aeon-purple"
+                          >
+                            <option value="15">15 seconds</option>
+                            <option value="30">30 seconds</option>
+                            <option value="60">60 seconds</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Style</label>
+                          <select 
+                            value={formData.style}
+                            onChange={(e) => setFormData({...formData, style: e.target.value as 'trendy' | 'professional' | 'casual'})}
+                            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:ring-2 focus:ring-aeon-purple"
+                          >
+                            <option value="trendy">Trendy</option>
+                            <option value="professional">Professional</option>
+                            <option value="casual">Casual</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      {error && (
+                        <div className="p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-200">
+                          {error}
+                        </div>
+                      )}
+
+                      <button
+                        onClick={handleGenerate}
+                        disabled={isGenerating}
+                        className="w-full bg-gradient-to-r from-aeon-purple to-aeon-blue px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center"
+                      >
+                        {isGenerating ? (
+                          <>
+                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                            Generating... {Math.round(generationProgress)}%
+                          </>
+                        ) : (
+                          <>
+                            <Wand2 className="w-5 h-5 mr-2" />
+                            Generate Video
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Preview Panel */}
+                  <div className="glass-effect rounded-xl p-6">
+                    <h3 className="text-xl font-semibold mb-4">Preview</h3>
+                    <div className="aspect-[9/16] bg-black rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+                      {isGenerating ? (
+                        <div className="text-center">
+                          <div className="animate-pulse mb-4">
+                            <Sparkles className="w-12 h-12 mx-auto text-aeon-purple" />
+                          </div>
+                          <p className="text-gray-300">AI is crafting your video...</p>
+                          <div className="w-48 bg-white/20 rounded-full h-2 mt-4">
+                            <div 
+                              className="bg-gradient-to-r from-aeon-purple to-aeon-blue h-2 rounded-full transition-all duration-200"
+                              style={{ width: `${generationProgress}%` }}
+                            ></div>
+                          </div>
+                          <p className="text-sm text-gray-400 mt-2">{Math.round(generationProgress)}% complete</p>
+                        </div>
+                      ) : generatedVideo ? (
+                        <div className="w-full h-full flex flex-col">
+                          {generatedVideo.url ? (
+                            <video 
+                              src={generatedVideo.url} 
+                              controls 
+                              className="w-full h-full object-cover rounded-lg"
+                              poster="/placeholder.jpg"
+                            />
+                          ) : (
+                            <div className="flex-1 flex items-center justify-center bg-gradient-to-br from-aeon-purple/20 to-aeon-blue/20 rounded-lg">
+                              <div className="text-center p-4">
+                                <Video className="w-8 h-8 mx-auto mb-2 text-aeon-purple" />
+                                <p className="text-sm text-gray-300">Video generated successfully!</p>
+                                <p className="text-xs text-gray-400 mt-1">Script: {generatedVideo.script?.slice(0, 50)}...</p>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="text-center text-gray-400">
+                          <Video className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                          <p>Your video will appear here</p>
+                          <p className="text-sm mt-2">Enter a topic and click Generate</p>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex space-x-2">
+                      <button 
+                        disabled={!generatedVideo}
+                        className="flex-1 bg-white/10 hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 rounded-lg transition-colors flex items-center justify-center"
+                      >
+                        <Play className="w-4 h-4 mr-2" />
+                        Preview
+                      </button>
+                      <button 
+                        disabled={!generatedVideo?.url}
+                        onClick={() => generatedVideo?.url && window.open(generatedVideo.url, '_blank')}
+                        className="flex-1 bg-white/10 hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 rounded-lg transition-colors flex items-center justify-center"
+                      >
+                        <Download className="w-4 h-4 mr-2" />
+                        Download
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'visual' && (
+              <div className="h-full">
+                <div className="mb-6">
+                  <h1 className="text-3xl font-bold mb-2">Visual Creator</h1>
+                  <p className="text-gray-300">Generate stunning visuals and animations for your content</p>
+                </div>
+                <div className="glass-effect rounded-xl p-8 text-center">
+                  <Image className="w-16 h-16 mx-auto mb-4 text-aeon-purple" />
+                  <h3 className="text-xl font-semibold mb-2">Visual Creator</h3>
+                  <p className="text-gray-300 mb-6">Create stunning visuals, backgrounds, and animations</p>
+                  <button className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-6 py-3 rounded-lg font-semibold">
+                    Coming Soon
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'human' && (
+              <div className="h-full">
+                <div className="mb-6">
+                  <h1 className="text-3xl font-bold mb-2">Human Studio</h1>
+                  <p className="text-gray-300">Create realistic human avatars and voiceovers</p>
+                </div>
+                <div className="glass-effect rounded-xl p-8 text-center">
+                  <Users className="w-16 h-16 mx-auto mb-4 text-aeon-purple" />
+                  <h3 className="text-xl font-semibold mb-2">Human Studio</h3>
+                  <p className="text-gray-300 mb-6">Generate realistic human avatars and AI voices</p>
+                  <button className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-6 py-3 rounded-lg font-semibold">
+                    Coming Soon
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'sound' && (
+              <div className="h-full">
+                <div className="mb-6">
+                  <h1 className="text-3xl font-bold mb-2">Sound Lab</h1>
+                  <p className="text-gray-300">AI-powered music and sound effect generation</p>
+                </div>
+                <div className="glass-effect rounded-xl p-8 text-center">
+                  <Music className="w-16 h-16 mx-auto mb-4 text-aeon-purple" />
+                  <h3 className="text-xl font-semibold mb-2">Sound Lab</h3>
+                  <p className="text-gray-300 mb-6">Create custom music and sound effects with AI</p>
+                  <button className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-6 py-3 rounded-lg font-semibold">
+                    Coming Soon
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {(activeTab === 'mass' || activeTab === 'campaign') && (
+              <div className="h-full">
+                <div className="mb-6">
+                  <h1 className="text-3xl font-bold mb-2">
+                    {activeTab === 'mass' ? 'Mass Creator' : 'Campaign Hub'}
+                  </h1>
+                  <p className="text-gray-300">
+                    {activeTab === 'mass' 
+                      ? 'Batch create hundreds of videos for campaigns' 
+                      : 'Manage multi-platform campaigns and analytics'
+                    }
+                  </p>
+                </div>
+                <div className="glass-effect rounded-xl p-8 text-center">
+                  {activeTab === 'mass' ? (
+                    <TrendingUp className="w-16 h-16 mx-auto mb-4 text-yellow-400" />
+                  ) : (
+                    <BarChart3 className="w-16 h-16 mx-auto mb-4 text-yellow-400" />
+                  )}
+                  <h3 className="text-xl font-semibold mb-2">Premium Feature</h3>
+                  <p className="text-gray-300 mb-6">This feature is available in Ultimate plan</p>
+                  <button className="bg-gradient-to-r from-yellow-500 to-orange-500 px-6 py-3 rounded-lg font-semibold">
+                    Upgrade to Ultimate
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
+        </main>
       </div>
     </div>
-  );
-};
-
-export default AeonStudio;
+  )
+}
