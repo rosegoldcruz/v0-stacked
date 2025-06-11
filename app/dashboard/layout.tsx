@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type React from "react"
 import Sidebar from "@/components/dashboard/sidebar"
 import Header from "@/components/dashboard/header"

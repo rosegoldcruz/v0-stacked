@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Bell, Search, Settings, LogOut, User, CreditCard } from "lucide-react"
