@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Cosmic Aurora Dark Theme - Default */
+    --background: 220 40% 5%; /* Deep space blue-black */
+    --foreground: 210 30% 90%; /* Light cool gray */
+
+    --card: 220 35% 10%; /* Slightly lighter deep blue for cards */
+    --card-foreground: 210 30% 90%;
+
+    --popover: 220 40% 8%;
+    --popover-foreground: 210 30% 90%;
+
+    --primary: 180 90% 50%; /* Vibrant Cyan/Teal - Aurora Glow */
+    --primary-foreground: 220 40% 5%; /* Dark text on primary */
+
+    --secondary: 240 50% 25%; /* Deep Indigo */
+    --secondary-foreground: 180 90% 85%; /* Light cyan for text on secondary */
+
+    --muted: 220 30% 20%; /* Muted dark blue-gray */
+    --muted-foreground: 210 25% 65%; /* Softer gray for muted text */
+
+    --accent: 300 90% 65%; /* Electric Magenta/Purple - Accent Glow */
+    --accent-foreground: 210 30% 98%;
+
+    --destructive: 0 70% 55%; /* Vivid Red for errors */
+    --destructive-foreground: 210 30% 98%;
+
+    --border: 200 50% 25%; /* Cool blue border, can have a glow */
+    --input: 220 30% 15%; /* Dark input background */
+    --ring: 180 90% 55%; /* Ring matches primary, slightly brighter */
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Zoom-Responsive CSS */
+/* Sidebar width is now handled directly in sidebar.tsx */
+/* Main content margin is now handled directly in app/dashboard/layout.tsx */
+
+.dashboard-card {
+  @apply bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors cursor-pointer;
+  min-height: 150px;
+}
+
+.scene-container {
+  @apply flex overflow-x-auto pb-4;
+  scroll-behavior: smooth;
+}
+
+.scene-card {
+  @apply bg-gray-800 rounded-lg p-4 min-w-48 hover:bg-gray-700 transition-colors;
+}
