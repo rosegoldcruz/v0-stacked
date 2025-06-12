@@ -1,8 +1,8 @@
-// @ts-nocheck
 'use client'
 
 import { useState } from 'react'
 import { Play, Zap, Users, TrendingUp, Check, ArrowRight, Sparkles } from 'lucide-react'
+import Link from 'next/link'
 
 export default function HomePage() {
   const [selectedPlan, setSelectedPlan] = useState('pro')
@@ -194,15 +194,29 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="glass-effect p-8 rounded-2xl hover-lift">
-                <div className="w-12 h-12 bg-gradient-to-r from-aeon-purple to-aeon-blue rounded-lg flex items-center justify-center mb-6">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
-                <p className="text-gray-300">{feature.description}</p>
-              </div>
-            ))}
+            {features.map((feature, index) => {
+              type RouteKey = 'Video Forge' | 'Visual Creator' | 'Human Studio' | 'Sound Lab' | 'Mass Creator';
+              const routes: Record<RouteKey, string> = {
+                'Video Forge': '/video-forge',
+                'Visual Creator': '/visual-creator',
+                'Human Studio': '/human-studio',
+                'Sound Lab': '/sound-lab',
+                'Mass Creator': '/mass-creator'
+              };
+              
+              const href = (routes as Record<string, string>)[feature.title] || '/campaign-hub';
+              return (
+                <Link key={index} href={href}>
+                  <div className="glass-effect p-8 rounded-2xl hover-lift">
+                    <div className="w-12 h-12 bg-gradient-to-r from-aeon-purple to-aeon-blue rounded-lg flex items-center justify-center mb-6">
+                      {feature.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
+                    <p className="text-gray-300">{feature.description}</p>
+                  </div>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>
