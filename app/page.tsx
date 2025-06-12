@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Play, Zap, Users, TrendingUp, Check, ArrowRight, Sparkles } from 'lucide-react'
+import { Play, Zap, Users, TrendingUp, Check, Sparkles } from 'lucide-react'
 import Link from 'next/link'
+import { PrimaryCTA, SecondaryCTA, GoButton, FeatureHighlight, GradientHeadline } from '@/components/ui/color-variants'
 
 export default function HomePage() {
   const [selectedPlan, setSelectedPlan] = useState('pro')
@@ -140,30 +141,22 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+          <GradientHeadline>
             Create Anything with
             <br />
-            <span className="gradient-text">AI-Powered Magic</span>
-          </h1>
+            <span className="bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">AI-Powered Magic</span>
+          </GradientHeadline>
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
             Transform your ideas into viral TikTok videos in seconds. Our AI analyzes trending content 
             and creates engaging videos that capture attention and drive results.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <button 
-              onClick={() => window.location.href = '/dashboard'}
-              className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-opacity flex items-center justify-center"
-            >
-              Start Creating Free
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </button>
-            <button 
-              onClick={() => window.location.href = '/dashboard'}
-              className="border border-white/20 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/10 transition-colors flex items-center justify-center"
-            >
-              <Play className="mr-2 w-5 h-5" />
-              Watch Demo
-            </button>
+            <div onClick={() => window.location.href = '/dashboard'}>
+              <PrimaryCTA />
+            </div>
+            <div onClick={() => window.location.href = '/dashboard'}>
+              <SecondaryCTA />
+            </div>
           </div>
 
           {/* Stats */}
@@ -187,10 +180,15 @@ export default function HomePage() {
               <br />
               <span className="gradient-text">One Powerful Platform</span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
               Access professional-grade AI tools designed to create viral content. 
               From script generation to final video, we've got you covered.
             </p>
+            <div className="max-w-2xl mx-auto">
+              <FeatureHighlight>
+                Try our latest AI Avatars, now 10x faster with real-time rendering.
+              </FeatureHighlight>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -239,8 +237,10 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {plans.map((plan, index) => (
               <div key={index} className={`relative p-8 rounded-2xl ${
-                plan.popular 
-                  ? 'bg-gradient-to-br from-aeon-purple/20 to-aeon-blue/20 border-2 border-aeon-purple' 
+                plan.name === 'Ultimate' 
+                  ? 'bg-gradient-to-br from-black via-gray-900 to-purple-900 border-2 border-purple-600' 
+                  : plan.popular 
+                  ? 'bg-gradient-to-br from-blue-600/20 to-purple-600/20 border-2 border-blue-600' 
                   : 'glass-effect'
               } hover-lift`}>
                 {plan.popular && (
@@ -269,16 +269,21 @@ export default function HomePage() {
                   ))}
                 </ul>
 
-                <button 
-              onClick={() => window.location.href = '/dashboard'}
-                  className={`w-full py-3 rounded-lg font-semibold transition-all ${
-                    plan.popular 
-                      ? 'bg-gradient-to-r from-aeon-purple to-aeon-blue hover:opacity-90' 
-                      : 'border border-white/20 hover:bg-white/10'
-                  }`}
-                >
-                  {plan.buttonText}
-                </button>
+                <div onClick={() => window.location.href = '/dashboard'}>
+                  {plan.name === 'Ultimate' ? (
+                    <GoButton />
+                  ) : (
+                    <button 
+                      className={`w-full py-3 rounded-lg font-semibold transition-all ${
+                        plan.popular 
+                          ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                          : 'border border-white/20 hover:bg-white/10'
+                      }`}
+                    >
+                      {plan.buttonText}
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -297,18 +302,12 @@ export default function HomePage() {
             Join thousands of creators who are already using AEON to build viral content.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={() => window.location.href = '/dashboard'}
-              className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-opacity"
-            >
-              Start Creating Free
-            </button>
-            <button 
-              onClick={() => window.location.href = '/dashboard'}
-              className="border border-white/20 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/10 transition-colors"
-            >
-              Book a Demo
-            </button>
+            <div onClick={() => window.location.href = '/dashboard'}>
+              <PrimaryCTA />
+            </div>
+            <div onClick={() => window.location.href = '/dashboard'}>
+              <SecondaryCTA />
+            </div>
           </div>
         </div>
       </section>
