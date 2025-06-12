@@ -151,14 +151,14 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <button 
-              onClick={() => window.location.href = '/dashboard/studio'}
+              onClick={() => window.location.href = '/dashboard'}
               className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-opacity flex items-center justify-center"
             >
               Start Creating Free
               <ArrowRight className="ml-2 w-5 h-5" />
             </button>
             <button 
-              onClick={() => window.location.href = '/dashboard/studio'}
+              onClick={() => window.location.href = '/dashboard'}
               className="border border-white/20 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/10 transition-colors flex items-center justify-center"
             >
               <Play className="mr-2 w-5 h-5" />
@@ -270,7 +270,7 @@ export default function HomePage() {
                 </ul>
 
                 <button 
-                  onClick={() => window.location.href = plan.name === 'Free' ? '/dashboard' : '/dashboard/studio'}
+              onClick={() => window.location.href = '/dashboard'}
                   className={`w-full py-3 rounded-lg font-semibold transition-all ${
                     plan.popular 
                       ? 'bg-gradient-to-r from-aeon-purple to-aeon-blue hover:opacity-90' 
@@ -298,7 +298,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
-              onClick={() => window.location.href = '/dashboard/studio'}
+              onClick={() => window.location.href = '/dashboard'}
               className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-opacity"
             >
               Start Creating Free

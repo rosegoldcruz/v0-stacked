@@ -416,8 +416,11 @@ export default function StudioPage() {
                   <Image className="w-16 h-16 mx-auto mb-4 text-aeon-purple" />
                   <h3 className="text-xl font-semibold mb-2">Visual Creator</h3>
                   <p className="text-gray-300 mb-6">Create stunning visuals, backgrounds, and animations</p>
-                  <button className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-6 py-3 rounded-lg font-semibold">
-                    Coming Soon
+                  <button 
+                    onClick={() => window.location.href = '/visual-creator'}
+                    className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                  >
+                    Launch Visual Creator
                   </button>
                 </div>
               </div>
@@ -433,8 +436,11 @@ export default function StudioPage() {
                   <Users className="w-16 h-16 mx-auto mb-4 text-aeon-purple" />
                   <h3 className="text-xl font-semibold mb-2">Human Studio</h3>
                   <p className="text-gray-300 mb-6">Generate realistic human avatars and AI voices</p>
-                  <button className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-6 py-3 rounded-lg font-semibold">
-                    Coming Soon
+                  <button 
+                    onClick={() => window.location.href = '/human-studio'}
+                    className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                  >
+                    Launch Human Studio
                   </button>
                 </div>
               </div>
@@ -450,8 +456,11 @@ export default function StudioPage() {
                   <Music className="w-16 h-16 mx-auto mb-4 text-aeon-purple" />
                   <h3 className="text-xl font-semibold mb-2">Sound Lab</h3>
                   <p className="text-gray-300 mb-6">Create custom music and sound effects with AI</p>
-                  <button className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-6 py-3 rounded-lg font-semibold">
-                    Coming Soon
+                  <button 
+                    onClick={() => window.location.href = '/sound-lab'}
+                    className="bg-gradient-to-r from-aeon-purple to-aeon-blue px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                  >
+                    Launch Sound Lab
                   </button>
                 </div>
               </div>
