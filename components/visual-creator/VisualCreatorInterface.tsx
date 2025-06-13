@@ -348,17 +348,17 @@ export default function VisualCreatorInterface() {
                               />
                             </div>
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center gap-2">
-                              <Button size="sm" variant="secondary">
+                              <Button size="sm" variant="secondary" onClick={() => {}}>
                                 <Eye className="h-4 w-4" />
                               </Button>
-                              <Button size="sm" variant="secondary">
+                              <Button size="sm" variant="secondary" onClick={() => {}}>
                                 <Download className="h-4 w-4" />
                               </Button>
-                              <Button size="sm" variant="secondary">
+                              <Button size="sm" variant="secondary" onClick={() => {}}>
                                 <Copy className="h-4 w-4" />
                               </Button>
-                              <Button 
-                                size="sm" 
+                              <Button
+                                size="sm"
                                 variant="destructive"
                                 onClick={() => deleteImage(image.id)}
                               >
@@ -394,7 +394,7 @@ export default function VisualCreatorInterface() {
                         <Zap className="h-12 w-12 text-gray-500 mx-auto mb-4" />
                         <h3 className="text-lg font-medium text-gray-300 mb-2">Batch Generation</h3>
                         <p className="text-gray-400 mb-4">Upgrade to create multiple images at once</p>
-                        <Button className="bg-purple-600 hover:bg-purple-700">
+                        <Button className="bg-purple-600 hover:bg-purple-700" onClick={() => {}}>
                           Upgrade Plan
                         </Button>
                       </div>
@@ -404,11 +404,11 @@ export default function VisualCreatorInterface() {
                           Upload a CSV file with prompts or enter multiple prompts to generate variations
                         </p>
                         <div className="grid grid-cols-2 gap-4">
-                          <Button variant="outline" className="border-gray-600">
+                          <Button variant="outline" className="border-gray-600" onClick={() => {}}>
                             <Upload className="h-4 w-4 mr-2" />
                             Upload CSV
                           </Button>
-                          <Button variant="outline" className="border-gray-600">
+                          <Button variant="outline" className="border-gray-600" onClick={() => {}}>
                             <Wand2 className="h-4 w-4 mr-2" />
                             Prompt Templates
                           </Button>
@@ -479,15 +479,15 @@ export default function VisualCreatorInterface() {
                 <CardTitle className="text-lg">Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button variant="outline" className="w-full justify-start border-gray-600">
+                <Button variant="outline" className="w-full justify-start border-gray-600" onClick={() => {}}>
                   <Upload className="h-4 w-4 mr-2" />
                   Upload Reference
                 </Button>
-                <Button variant="outline" className="w-full justify-start border-gray-600">
+                <Button variant="outline" className="w-full justify-start border-gray-600" onClick={() => {}}>
                   <Wand2 className="h-4 w-4 mr-2" />
                   Random Prompt
                 </Button>
-                <Button variant="outline" className="w-full justify-start border-gray-600">
+                <Button variant="outline" className="w-full justify-start border-gray-600" onClick={() => {}}>
                   <Copy className="h-4 w-4 mr-2" />
                   Prompt Library
                 </Button>
@@ -507,7 +507,7 @@ export default function VisualCreatorInterface() {
                     <li>• Advanced models</li>
                     <li>• Priority processing</li>
                   </ul>
-                  <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700" onClick={() => {}}>
                     Upgrade Now
                   </Button>
                 </CardContent>

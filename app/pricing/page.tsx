@@ -162,11 +162,14 @@ export default function PricingPage() {
                 ))}
               </div>
 
-              <button className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${
-                plan.popular
-                  ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white'
-                  : 'bg-gray-700 hover:bg-gray-600 text-white'
-              }`}>
+              <button
+                onClick={() => {}}
+                className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${
+                  plan.popular
+                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white'
+                    : 'bg-gray-700 hover:bg-gray-600 text-white'
+                }`}
+              >
                 {plan.cta}
                 <ArrowRight className="w-4 h-4 ml-2 inline" />
               </button>
@@ -240,10 +243,16 @@ export default function PricingPage() {
           <h2 className="text-3xl font-bold mb-4">Ready to Start Creating?</h2>
           <p className="text-gray-300 mb-8">Join thousands of creators making viral content with AEON</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all">
+            <button
+              onClick={() => {}}
+              className="bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-700 transition-all"
+            >
               Start Free Trial
             </button>
-            <button className="border border-gray-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all">
+            <button
+              onClick={() => {}}
+              className="border border-gray-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all"
+            >
               Contact Sales
             </button>
           </div>
