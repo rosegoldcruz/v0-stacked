@@ -15,15 +15,23 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[
+          {
+            title: '🎨 AEON Studio',
+            subtitle: 'Creative Command Center',
+            description: 'Your central hub for all AI creative tools',
+            href: '/studio',
+            gradient: 'from-orange-500 to-red-600',
+            tag: '🔥 HOT'
+          },
           {
             title: '🎬 AEON Video',
             subtitle: '1-Minute AI Videos',
             description: 'Generate viral TikTok videos in seconds',
             href: '/video-gen',
-            gradient: 'from-orange-500 to-red-600',
-            tag: '🔥 HOT'
+            gradient: 'from-red-500 to-pink-600',
+            tag: '🎬 NEW'
           },
           {
             title: '🎨 AI Image Studio',
@@ -45,7 +53,7 @@ export default function HomePage() {
             title: '🔗 API Access',
             subtitle: 'Developer Tools',
             description: 'Integrate AEON with your applications',
-            href: '/api',
+            href: '/api-access',
             gradient: 'from-green-500 to-teal-600',
             tag: '🚀 DEV'
           },
@@ -69,7 +77,7 @@ export default function HomePage() {
           <Link
             key={index}
             href={feature.href}
-            className={`relative p-6 bg-gradient-to-br ${feature.gradient} rounded-2xl cursor-pointer transform hover:scale-105 transition-all duration-300 group overflow-hidden`}
+            className={`relative w-full max-w-sm mx-auto p-6 bg-gradient-to-br ${feature.gradient} rounded-2xl cursor-pointer transform hover:scale-105 transition-all duration-300 group overflow-hidden touch-manipulation`}
           >
             <div className="absolute inset-0 opacity-10">
               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
