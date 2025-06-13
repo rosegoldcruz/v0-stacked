@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import VideoForgeInterface from '@/components/video-forge/VideoForgeInterface'
+import AEONVideoInterface from '@/components/aeon-video/AEONVideoInterface'
 
 export const metadata: Metadata = {
   title: 'Video Forge - AEON',
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 }
 
 export default function VideoForgePage() {
-  return <VideoForgeInterface />
+  return <AEONVideoInterface />
 }
