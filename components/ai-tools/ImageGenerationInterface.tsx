@@ -1,7 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { Sparkles, Upload, Download, Settings, Zap, Image, Palette, Wand2, RefreshCw } from 'lucide-react';
+// Using emojis instead of Lucide icons
+const Icons = {
+  Sparkles: '✨',
+  Upload: '⬆️',
+  Download: '⬇️',
+  Settings: '⚙️',
+  Zap: '⚡',
+  Image: '🖼️',
+  Palette: '🎨',
+  Wand: '🪄',
+  RefreshCw: '🔄'
+};
 
 export default function ImageGenerationInterface() {
   const [selectedModel, setSelectedModel] = useState('stable-diffusion');
@@ -29,7 +40,7 @@ export default function ImageGenerationInterface() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="p-2 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg">
-                <Wand2 className="w-6 h-6" />
+                <span className="text-2xl">{Icons.Wand}</span>
               </div>
               <div>
                 <h1 className="text-2xl font-bold">AI Image Generation</h1>
@@ -38,7 +49,7 @@ export default function ImageGenerationInterface() {
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2 text-sm text-gray-400">
-                <Zap className="w-4 h-4" />
+                <span className="text-lg">{Icons.Zap}</span>
                 <span>Replicate Powered</span>
               </div>
             </div>
@@ -85,12 +96,12 @@ export default function ImageGenerationInterface() {
                   >
                     {isGenerating ? (
                       <div className="flex items-center justify-center space-x-2">
-                        <RefreshCw className="w-4 h-4 animate-spin" />
+                        <span className="text-lg inline-block animate-spin">{Icons.RefreshCw}</span>
                         <span>Generating...</span>
                       </div>
                     ) : (
                       <div className="flex items-center justify-center space-x-2">
-                        <Sparkles className="w-4 h-4" />
+                        <span className="text-lg">{Icons.Sparkles}</span>
                         <span>Generate Image</span>
                       </div>
                     )}
@@ -139,10 +150,10 @@ export default function ImageGenerationInterface() {
                         />
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-2">
                           <button className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
-                            <Download className="w-4 h-4" />
+                            <span className="text-lg">{Icons.Download}</span>
                           </button>
                           <button className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
-                            <Image className="w-4 h-4" />
+                            <span className="text-lg">{Icons.Image}</span>
                           </button>
                         </div>
                       </div>
@@ -150,7 +161,7 @@ export default function ImageGenerationInterface() {
                   </div>
                 ) : (
                   <div className="flex flex-col items-center justify-center h-64 text-gray-400">
-                    <Image className="w-12 h-12 mb-4" />
+                    <span className="text-4xl mb-4">{Icons.Image}</span>
                     <p>No images generated yet</p>
                     <p className="text-sm">Enter a prompt and click generate to start</p>
                   </div>
@@ -171,7 +182,7 @@ export default function ImageGenerationInterface() {
               <div className="bg-gray-900 rounded-lg p-4 border border-gray-700">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="font-medium">Current Model</h4>
-                  <Settings className="w-4 h-4 text-gray-400" />
+                  <span className="text-lg text-gray-400">{Icons.Settings}</span>
                 </div>
                 <p className="text-sm text-gray-400">{selectedModel}</p>
               </div>

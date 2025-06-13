@@ -11,7 +11,18 @@ import { Slider } from '@/components/ui/slider'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Progress } from '@/components/ui/progress'
-import { Video, Upload, Play, Download, Settings, Wand2, Clock, Users, Zap } from 'lucide-react'
+// Using emojis instead of icons
+const Icons = {
+  Video: '🔮',  // Crystal ball for AEON video
+  Upload: '⬆️',
+  Play: '▶️',
+  Download: '⬇️',
+  Settings: '⚙️',
+  Wand: '🪄',
+  Clock: '⏰',
+  Users: '👥',
+  Zap: '⚡'
+}
 import { useSubscription } from '@/hooks/useSubscription'
 
 const videoStyles = [
@@ -31,7 +42,7 @@ const voiceActors = [
   { id: 'custom', name: 'Custom Voice', type: 'Upload your own', accent: 'Any' }
 ]
 
-export default function VideoForgeInterface() {
+export default function AEONVideoInterface() {
   const { tier } = useSubscription()
   const [activeTab, setActiveTab] = useState('script')
   const [script, setScript] = useState('')
@@ -77,8 +88,8 @@ export default function VideoForgeInterface() {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <Video className="h-8 w-8 text-blue-400" />
-            <h1 className="text-3xl font-bold">Video Forge</h1>
+            <span className="text-3xl">{Icons.Video}</span>
+            <h1 className="text-3xl font-bold">AEON Video</h1>
             <Badge variant="secondary">AI-Powered</Badge>
           </div>
           <p className="text-gray-400 text-lg">Transform scripts into professional videos with AI narration and visuals</p>
@@ -98,7 +109,7 @@ export default function VideoForgeInterface() {
                 <Card className="bg-gray-800 border-gray-700">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <Upload className="h-5 w-5" />
+                      <span className="text-xl">{Icons.Upload}</span>
                       Script Input
                     </CardTitle>
                     <CardDescription>
@@ -122,11 +133,11 @@ export default function VideoForgeInterface() {
                     
                     <div className="grid grid-cols-2 gap-4">
                       <Button variant="outline" className="border-gray-600">
-                        <Upload className="h-4 w-4 mr-2" />
+                        <span className="text-lg mr-2">{Icons.Upload}</span>
                         Upload Script File
                       </Button>
                       <Button variant="outline" className="border-gray-600">
-                        <Wand2 className="h-4 w-4 mr-2" />
+                        <span className="text-lg mr-2">{Icons.Wand}</span>
                         AI Script Generator
                       </Button>
                     </div>
@@ -299,7 +310,7 @@ export default function VideoForgeInterface() {
                     className="w-full bg-blue-600 hover:bg-blue-700"
                     size="lg"
                   >
-                    <Video className="h-5 w-5 mr-2" />
+                    <span className="text-xl mr-2">{Icons.Video}</span>
                     Generate Video
                   </Button>
                 )}
@@ -321,15 +332,15 @@ export default function VideoForgeInterface() {
                   <div className="space-y-4">
                     <div className="bg-gray-700 rounded-lg p-4">
                       <div className="aspect-video bg-gray-600 rounded-lg flex items-center justify-center mb-4">
-                        <Play className="h-16 w-16 text-gray-400" />
+                        <span className="text-4xl text-gray-400">{Icons.Play}</span>
                       </div>
                       <div className="flex gap-2">
                         <Button className="flex-1">
-                          <Play className="h-4 w-4 mr-2" />
+                          <span className="text-lg mr-2">{Icons.Play}</span>
                           Preview
                         </Button>
                         <Button variant="outline" className="flex-1">
-                          <Download className="h-4 w-4 mr-2" />
+                          <span className="text-lg mr-2">{Icons.Download}</span>
                           Download
                         </Button>
                       </div>
@@ -350,7 +361,7 @@ export default function VideoForgeInterface() {
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-blue-400" />
+                    <span className="text-lg text-blue-400">{Icons.Clock}</span>
                     <span className="text-sm">Time Remaining</span>
                   </div>
                   <Badge variant="outline">
@@ -359,14 +370,14 @@ export default function VideoForgeInterface() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4 text-green-400" />
+                    <span className="text-lg text-green-400">{Icons.Users}</span>
                     <span className="text-sm">Videos Created</span>
                   </div>
                   <Badge variant="outline">12 this month</Badge>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Zap className="h-4 w-4 text-yellow-400" />
+                    <span className="text-lg text-yellow-400">{Icons.Zap}</span>
                     <span className="text-sm">Credits</span>
                   </div>
                   <Badge variant="outline">
@@ -389,7 +400,7 @@ export default function VideoForgeInterface() {
                 ].map((video, i) => (
                   <div key={i} className="flex items-center gap-3 p-3 bg-gray-700 rounded-lg">
                     <div className="w-12 h-8 bg-gray-600 rounded flex items-center justify-center">
-                      <Play className="h-3 w-3" />
+                      <span className="text-sm">{Icons.Play}</span>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium truncate">{video.title}</p>
