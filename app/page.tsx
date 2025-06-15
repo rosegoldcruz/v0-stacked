@@ -22,7 +22,7 @@ export default function HomePage() {
       </div>
 
       {/* HERO SECTION */}
-      <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+      <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-16">
         {/* Hero Text Section */}
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           {/* Main Headline */}

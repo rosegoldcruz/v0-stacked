@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./styles/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import LayoutWrapper from "@/components/LayoutWrapper"
+import ConditionalLayout from "@/components/ConditionalLayout"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -50,9 +50,9 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <LayoutWrapper>
+          <ConditionalLayout>
             {children}
-          </LayoutWrapper>
+          </ConditionalLayout>
         </ThemeProvider>
       </body>
     </html>
